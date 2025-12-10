@@ -1,0 +1,207 @@
+#CADASTRAR CLIENTES LINHA 10
+#BUSCAR CLIENTES LINHA 44
+#CADASTRAR PRODUTOS LINHA 52
+#ENTRADA PRODUTO LINHA 100
+#BUSCAR PRODUTOS LINHA 141
+#REALIZAR VENDAS 149
+
+
+###################################################
+#CADASTRAR CLIENTES								  #
+###################################################
+
+http://localhost:8084/clientes/create
+POST
+{
+  "nome": "Mariana Duarte Figueiredo",
+  "documento": "48291736022"
+}
+
+http://localhost:8084/clientes/create
+POST
+{
+  "nome": "Rafael Coelho Andrade",
+  "documento": "17390452861"
+}
+
+http://localhost:8084/clientes/create
+POST
+{
+  "nome": "Empresa Produtos Helper Ltda",
+  "documento": "41892735000189"
+}
+
+http://localhost:8084/clientes/create
+POST
+{
+  "nome": "Juliana Barbosa Campos",
+  "documento": "90531874240"
+}
+
+####################################################
+#BUSCAR CLIENTES								   #
+####################################################
+
+GET
+http://localhost:8084/clientes/41892735000189
+
+
+####################################################
+#CADASTRAR PRODUTO								   #
+####################################################
+
+http://localhost:8083/produtos/cadastrar
+POST
+{
+   "codigoBarras": "7896543201987",
+   "nomeProduto": "SABÃO EM PÓ 1KG BRANQUEADOR",
+   "aliquotaIcms": 19.0,
+   "margemLucro": 25.0
+}
+http://localhost:8083/produtos/cadastrar
+POST
+{
+   "codigoBarras": "7891234509876",
+   "nomeProduto": "DETERGENTE LÍQUIDO 500ML LIMÃO",
+   "aliquotaIcms": 18.0,
+   "margemLucro": 22.0
+}
+
+http://localhost:8083/produtos/cadastrar
+POST
+{
+  "codigoBarras": "7894453298761",
+  "nomeProduto": "ESPONJA MULTIUSO PREMIUM",
+  "aliquotaIcms": 20.0,
+  "margemLucro": 30.0
+}
+
+http://localhost:8083/produtos/cadastrar
+POST
+{
+  "codigoBarras": "7899988877712",
+  "nomeProduto": "DESINFETANTE 1L EUCALIPTO FRESH",
+  "aliquotaIcms": 18.0,
+  "margemLucro": 21.0
+}
+
+http://localhost:8083/produtos/cadastrar
+POST
+{
+  "codigoBarras": "7897776603345",
+  "nomeProduto": "ÁGUA SANITÁRIA 2L MAX CLEAN",
+  "aliquotaIcms": 17.0,
+  "margemLucro": 18.0
+}
+
+####################################################
+#ENTRADA PRODUTO								   #
+####################################################
+
+http://localhost:8083/entrada/salvar
+POST
+{
+  "fornecedor": "41892735000189",
+  "dataEntrada": "2025-12-09",
+  "itens": [
+    {
+      "codigoBarras": "7891234509876",
+      "quantidade": 5,
+      "valorUnitario": 48.00
+    },
+    {
+      "codigoBarras": "7896543201987",
+      "quantidade": 10,
+      "valorUnitario": 25.00
+    },
+    {
+      "codigoBarras": "7897776603345",
+      "quantidade": 25,
+      "valorUnitario": 15.00
+    },
+    {
+      "codigoBarras": "7899988877712",
+      "quantidade": 25,
+      "valorUnitario": 15.00
+    },
+    {
+      "codigoBarras": "7894453298761",
+      "quantidade": 100,
+      "valorUnitario": 5.65
+    }
+  ]
+}
+
+
+####################################################
+#BUSCAR PRODUTOS							       #
+####################################################
+
+GET
+http://localhost:8083/produtos/7891234509876
+
+####################################################
+#REALIZAR VENDAS							       #
+####################################################
+
+http://localhost:8082/venda
+POST
+{
+  "clienteDocumento": "48291736022",
+  "dataVenda": "2025-12-07",
+  "itens": [
+    {
+      "codigoBarras": "7891234509876",
+      "quantidade": 2
+    },
+    {
+      "codigoBarras": "7896543201987",
+      "quantidade": 10
+    }
+  ]
+}
+
+http://localhost:8082/venda
+POST
+{
+  "clienteDocumento": "17390452861",
+  "dataVenda": "2025-12-08",
+  "itens": [
+    {
+      "codigoBarras": "7894453298761",
+      "quantidade": 1
+    },
+		 {
+      "codigoBarras": "7891234509876",
+      "quantidade": 1
+    },
+    {
+      "codigoBarras": "7896543201987",
+      "quantidade": 3
+    }
+  ]
+}
+
+http://localhost:8082/venda
+POST
+{
+  "clienteDocumento": "90531874240",
+  "dataVenda": "2025-12-09",
+  "itens": [
+    {
+      "codigoBarras": "7899988877712",
+      "quantidade": 4
+    },
+    {
+      "codigoBarras": "7896543201987",
+      "quantidade": 2
+    }
+  ]
+}
+
+####################################################
+#BUSCAR VENDAS							           #
+####################################################
+
+GET
+http://localhost:8082/venda
